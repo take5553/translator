@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 
-const API_KEY = "AIzaSyBaFTETfvcumwNBxsewv-OcYqAaxyoI5Jc"
+const API_KEY = "AIzaSyBaFTETfvcumwNBxsewv-OcYqAaxyoI5Jc";
+// const ACCESS_TOKEN = "ya29.c.ElpYBmJNOKuQ-02Tjy6VQovUWx5TIVfjM7WL6GAIrf5u69-Xzu97NHXk5weo3l9-FoDWxr77926sxb62IPYP6Hv6OtkYo4DyHKTNHv6h0Y7CU589QJc-7s08nYk";
 
 class App extends Component {
     constructor(props) {
@@ -14,21 +15,31 @@ class App extends Component {
     }
 
     translateText(){
-    	let fromLang = 'ja';
-    	let toLang = 'en';
-    	let text = this.refs.originalText.value;
+    	// let fromLang = 'ja';
+    	// let toLang = 'en';
+    	// let text = this.refs.originalText.value;
 
-    	let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
-    	url += '&q=' + encodeURI(text);
-    	url += `&source=${fromLang}`;
-    	url += `&target=${toLang}`;
+    	// let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+    	// url += '&q=' + encodeURI(text);
+    	// url += `&source=${fromLang}`;
+    	// url += `&target=${toLang}`;
+
+        let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`
+        let data = {
+            q: this.refs.originalText.value,
+            source: 'ja',
+            target: 'en',
+            format: 'text',
+        }
 
     	fetch(url, {
-    		method: 'GET',
+    		method: 'POST',
     		headers: {
     			"Content-Type": "application/json",
-    			accept: "application/json"
-    		}
+    			accept: "application/json",
+                // "Authorization": `Bearer ${ACCESS_TOKEN}`
+    		},
+            body: JSON.stringify(data)
     	})
     	.then(res => res.json())
     	.then((response) => {
