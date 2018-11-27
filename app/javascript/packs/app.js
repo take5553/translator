@@ -14,6 +14,7 @@ import {Footer} from './Footer'
 import {CreateSharePage} from "./CreateSharePage";
 //import {DropdownButton, MenuItem} from "react-bootstrap";
 import {ToastContainer, ToastStore} from 'react-toasts';
+import rsScroller from 'react-smooth-scroller';
 
 
 class App extends Component {
@@ -40,6 +41,8 @@ class App extends Component {
         // url += '&q=' + encodeURI(text);
         // url += `&source=${fromLang}`;
         // url += `&target=${toLang}`;
+
+        rsScroller.scrollToTarget('anchor-result');
 
         let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`
         let data = {
@@ -68,16 +71,20 @@ class App extends Component {
                 // エラーが起きた時
                 console.log("from google: ", error);
             });
+
     }
 
     copyText() {
         this.setState({copiedText: this.refs.translatedTextGoogle.value});
         ToastStore.success("コピーしました", 5000, "p-alert--success");
+        rsScroller.scrollToTarget('anchor-shareTextarea');
     }
 
     handleChange(e) {
         this.setState({copiedText: e.target.textarea});
     }
+
+
 
     render() {
         return (
@@ -115,7 +122,7 @@ class App extends Component {
 
                                 <div className="Result">
 
-                                    <section className="p-result__item">
+                                    <section className="p-result__ite anchor-result">
                                         <label htmlFor="resultInputGoogle" className="p-result__label">Google</label>
                                         <div className="p-result__clipboard">
 
@@ -150,7 +157,7 @@ class App extends Component {
 
                             <div className="shareTextarea">
 
-                                <p className="p-heading--share">この訳をシェアして添削してもらおう</p>
+                                <p className="p-heading--share anchor-shareTextarea">この訳をシェアして添削してもらおう</p>
 
                                 <div className="l-divide">
                                     <textarea value={this.state.copiedText} onChange={this.handleChange} className="p-textarea--source" id="resultInputShare" placeholder="ベストだと思う翻訳結果をペーストするか、オリジナルの英訳を入力してシェアしよう"/>

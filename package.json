@@ -9,6 +9,7 @@
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
+    "react-smooth-scroller": "^1.2.0",
     "react-toasts": "^2.0.14"
   },
   "devDependencies": {
