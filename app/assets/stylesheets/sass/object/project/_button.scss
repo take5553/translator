@@ -1,0 +1,53 @@
+@charset "utf-8";
+/*
+---
+name: button
+category:
+  - object
+  - object/project/button
+---
+
+ボタン関連
+
+*/
+
+.p-radioGroup {
+  @extend .btn-group !optional;
+  @extend .btn-group-toggle !optional;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  & > &__button {
+    @extend .btn !optional;
+    @extend .btn-primary !optional;
+    flex-basis: 100%;
+    background-color: #fff;
+    color: $primary;
+  }
+}
+
+.p-button--submit {
+  @extend .btn !optional;
+  @extend .btn-primary !optional;
+  width: 100%;
+}
+
+.p-button--situation {
+  @extend .btn !optional;
+  @extend .btn-outline-primary !optional;
+
+  br {
+    display: none;
+  }
+}
+
+.p-button--share {
+  @extend .btn !optional;
+  @extend .btn-primary !optional;
+
+  br {
+    display: none;
+  }
+}

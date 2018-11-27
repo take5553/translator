@@ -1,0 +1,30 @@
+@charset "utf-8";
+/*
+---
+name: translate-result
+category:
+  - object
+  - object/project/translate-result
+---
+
+翻訳後のテキストエリアのクリップボード周り
+
+*/
+
+.p-result {
+  margin-bottom: 1rem;
+
+  &__clipboard {
+    position: relative;
+  }
+}
+
+.p-clipboard__button {
+  @extend .btn !optional;
+  @extend .badge !optional;
+  @extend .badge-secondary !optional;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}

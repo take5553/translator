@@ -1,0 +1,16 @@
+@charset "utf-8";
+/*
+---
+name: container
+category:
+  - layout
+  - layout/container
+---
+
+最大幅を指定するコンテナ
+
+*/
+
+.l-container {
+  @extend .container !optional;
+}
