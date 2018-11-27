@@ -1,0 +1,26 @@
+@charset "utf-8";
+/*
+---
+name: header__language
+category:
+  - object
+  - object/project/header__language
+---
+
+ヘッダーの言語選択
+
+*/
+
+.p-language {
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    display: block;
+
+    & + & {
+      padding-left: 1rem;
+    }
+  }
+}

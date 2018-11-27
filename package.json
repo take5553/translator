@@ -4,9 +4,13 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
+    "bootstrap": "^3.3.7",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.6.3",
+    "react-smooth-scroller": "^1.2.0",
+    "react-toasts": "^2.0.14"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
