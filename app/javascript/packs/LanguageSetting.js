@@ -4,10 +4,15 @@ import {AlertCopy} from "./Alert";
 
 
 export class LanguageSetting extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             'lang': 'ja'
+        };
+        this.translateText = this.translateText.bind(this);
+
+        this.state = {
+            translatedText: "translated text will be here."
         };
     }
 
@@ -21,8 +26,8 @@ export class LanguageSetting extends Component {
                 </div>
 
 
-                <textarea className="p-textarea--source" placeholder="英語に翻訳したい文章を入力してください（●●字以内）"/>
-                <button type="submit" className="p-button--submit">翻訳</button>
+                <textarea ref="originalText" className="p-textarea--source" placeholder="英語に翻訳したい文章を入力してください（●●字以内）"/>
+                <button type="button" className="p-button--submit" onClick={this.translateText}>翻訳</button>
 
 
                 <Result/>
