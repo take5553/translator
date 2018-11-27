@@ -24,19 +24,23 @@ class App extends Component {
     	// url += `&source=${fromLang}`;
     	// url += `&target=${toLang}`;
 
-        let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`
+        // let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+        let url = 'https://translation.googleapis.com/language/translate/v2';
+
         let data = {
+            key: API_KEY,
             q: this.refs.originalText.value,
             source: 'ja',
             target: 'en',
-            format: 'text',
-        }
+            format: 'text'
+        };
 
     	fetch(url, {
     		method: 'POST',
     		headers: {
-    			"Content-Type": "application/json",
-    			accept: "application/json",
+                "X-HTTP-Method-Override": "GET"
+    			// "Content-Type": "application/json",
+    			// accept: "application/json",
                 // "Authorization": `Bearer ${ACCESS_TOKEN}`
     		},
             body: JSON.stringify(data)
