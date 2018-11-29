@@ -289,11 +289,11 @@ class App extends Component {
 
 
                                 <div className="l-divide c-accordion">
-                                    <label className="p-button--situation c-accordion__button">
-                                        <input type="checkbox" name="option" className="c-accordion__checkbox"/>
+                                    <label className="p-button--situation c-accordion__button" htmlFor="situationOption">
                                         シチュエーションを追加<br/>（オプション）
-
                                     </label>
+
+                                    <input type="checkbox" name="option" className="c-accordion__checkbox" id="situationOption"/>
                                     <div className="c-accordion__body">
                                         <label htmlFor="resultInputSituation">シチュエーション（オプション）</label><br/>
                                         <textarea className="p-textarea--source" id="resultInputSituation" placeholder="例：ビジネスのメール、友達との会話、大学のレポート など"/>
