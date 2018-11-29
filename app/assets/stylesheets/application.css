@@ -7267,6 +7267,29 @@ category:
 ----------------------------- */
 /* Use Bootstrap's Component */
 /*
+---
+name: accordion
+category:
+  - object
+  - object/component/accordion
+---
+
+CSSだけでアコーディオン
+
+*/
+.c-accordion__checkbox {
+  display: none; }
+  .c-accordion__checkbox:checked ~ .c-accordion__body {
+    max-height: 100vh;
+    opacity: 1; }
+
+.c-accordion__body {
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s;
+  overflow-y: auto; }
+
+/*
  Project
 ----------------------------- */
 /*
