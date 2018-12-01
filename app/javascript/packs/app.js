@@ -28,6 +28,7 @@ class App extends Component {
 
         this.copyText = this.copyText.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.valueCheck = this.valueCheck.bind(this);
 
         // stateを初期化
         this.state = {
@@ -37,7 +38,8 @@ class App extends Component {
             translatedTextYandex: "",
             copiedText: "",
             fromLang: "ja",
-            toLang: "en"
+            toLang: "en",
+            isSet: false //<- シェア用テキストエリアの値の有無を判別
         };
 
     }
@@ -210,6 +212,11 @@ class App extends Component {
         this.setState({copiedText: e.target.textarea});
     }
 
+    valueCheck(e) {
+        this.setState({isSet: !!e.target.value});
+    }
+
+
     render() {
         return (
             <div>
@@ -284,7 +291,7 @@ class App extends Component {
                                 <p className="p-heading--share anchor-shareTextarea">この訳をシェアして添削してもらおう</p>
 
                                 <div className="l-divide">
-                                    <textarea value={this.state.copiedText} onChange={this.handleChange} className="p-textarea--source" id="resultInputShare" placeholder="ベストだと思う翻訳結果をペーストするか、オリジナルの英訳を入力してシェアしよう"/>
+                                    <textarea value={this.state.copiedText} onChange={this.handleChange} onBlur={this.valueCheck} className="p-textarea--source" id="resultInputShare" placeholder="ベストだと思う翻訳結果をペーストするか、オリジナルの英訳を入力してシェアしよう"/>
                                 </div>
 
 
@@ -301,9 +308,8 @@ class App extends Component {
                                 </div>
 
                                 <div className="l-divide">
-                                    <button type="submit" className="p-button--share" disabled>この訳をシェアして<br/>添削してもらおう
+                                    <button type="submit" className="p-button--share" disabled={this.state.isSet === false && !this.state.copiedText }>この訳をシェアして<br/>添削してもらおう
                                     </button>
-                                    <button type="submit" className="p-button--share">この訳をシェアして<br/>添削してもらおう</button>
                                 </div>
 
                             </div>
