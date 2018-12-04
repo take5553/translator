@@ -26,8 +26,11 @@ class App extends Component {
         this.translateTextWatson = this.translateTextWatson.bind(this);
         this.translateTextYandex = this.translateTextYandex.bind(this);
 
-        this.copyText = this.copyText.bind(this);
+        this.copyTextGoogle = this.copyTextGoogle.bind(this);
+        this.copyTextBing = this.copyTextBing.bind(this);
+        this.copyTextYandex = this.copyTextYandex.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.valueCheck = this.valueCheck.bind(this);
 
         // stateを初期化
         this.state = {
@@ -37,7 +40,8 @@ class App extends Component {
             translatedTextYandex: "",
             copiedText: "",
             fromLang: "ja",
-            toLang: "en"
+            toLang: "en",
+            isSet: false //<- シェア用テキストエリアの値の有無を判別
         };
 
     }
@@ -150,15 +154,30 @@ class App extends Component {
 
     }
 
-    copyText() {
+
+    copyTextGoogle() {
         this.setState({copiedText: this.refs.translatedTextGoogle.value});
-        ToastStore.success("コピーしました", 5000, "p-alert--success");
+        ToastStore.success("Googleからの翻訳をコピーしました", 5000, "p-alert--success");
         rsScroller.scrollToTarget('anchor-shareTextarea');
     }
-
+    copyTextBing() {
+        this.setState({copiedText: this.refs.translatedTextBing.value});
+        ToastStore.success("Bingからの翻訳をコピーしました", 5000, "p-alert--success");
+        rsScroller.scrollToTarget('anchor-shareTextarea');
+    }
+    copyTextYandex() {
+        this.setState({copiedText: this.refs.translatedTextYandex.value});
+        ToastStore.success("Yandexからの翻訳をコピーしました", 5000, "p-alert--success");
+        rsScroller.scrollToTarget('anchor-shareTextarea');
+    }
     handleChange(e) {
         this.setState({copiedText: e.target.textarea});
     }
+
+    valueCheck(e) {
+        this.setState({isSet: !!e.target.value});
+    }
+
 
     render() {
         return (
@@ -196,21 +215,18 @@ class App extends Component {
 
                                 <div className="Result">
 
-                                    <section className="p-result__ite anchor-result">
+                                    <section className="p-result__item anchor-result">
                                         <label htmlFor="resultInputGoogle" className="p-result__label">Google</label>
                                         <div className="p-result__clipboard">
-
-
                                             <textarea ref="translatedTextGoogle" value={this.state.translatedTextGoogle} className="p-textarea--result" id="resultInputGoogle"/>
-                                            <button type="button" onClick={this.copyText} className="p-clipboard__button" data-original-title="テキストをコピー">コピー</button>
-
+                                            <button type="button" onClick={this.copyTextGoogle} className="p-clipboard__button" data-original-title="テキストをコピー">コピー1</button>
                                         </div>
                                     </section>
                                     <section className="p-result__item">
                                         <label htmlFor="resultInputBing" className="p-result__label">Bing</label>
                                         <div className="p-result__clipboard">
-                                            <textarea value={this.state.translatedTextBing} className="p-textarea--result" id="resultInputBing"/>
-                                            <button className="p-clipboard__button" data-original-title="テキストをコピー">コピー</button>
+                                            <textarea ref="translatedTextBing" value={this.state.translatedTextBing} className="p-textarea--result" id="resultInputBing"/>
+                                            <button type="button" onClick={this.copyTextBing} className="p-clipboard__button" data-original-title="テキストをコピー">コピー</button>
                                         </div>
                                     </section>
                                     <section className="p-result__item">
@@ -223,8 +239,8 @@ class App extends Component {
                                     <section className="p-result__item">
                                         <label htmlFor="resultInputWatson" className="p-result__label">Yandex</label>
                                         <div className="p-result__clipboard">
-                                            <textarea value={this.state.translatedTextYandex} className="p-textarea--result" id="resultInputWatson"/>
-                                            <button className="p-clipboard__button" data-original-title="テキストをコピー">コピー</button>
+                                            <textarea ref="translatedTextYandex" value={this.state.translatedTextYandex} className="p-textarea--result" id="resultInputYandex"/>
+                                            <button type="button" onClick={this.copyTextYandex} className="p-clipboard__button" data-original-title="テキストをコピー">コピー1</button>
                                         </div>
                                     </section>
                                 </div>
@@ -241,16 +257,16 @@ class App extends Component {
                                 <p className="p-heading--share anchor-shareTextarea">この訳をシェアして添削してもらおう</p>
 
                                 <div className="l-divide">
-                                    <textarea value={this.state.copiedText} onChange={this.handleChange} className="p-textarea--source" id="resultInputShare" placeholder="ベストだと思う翻訳結果をペーストするか、オリジナルの英訳を入力してシェアしよう"/>
+                                    <textarea value={this.state.copiedText} onChange={this.handleChange} onBlur={this.valueCheck} className="p-textarea--source" id="resultInputShare" placeholder="ベストだと思う翻訳結果をペーストするか、オリジナルの英訳を入力してシェアしよう"/>
                                 </div>
 
 
                                 <div className="l-divide c-accordion">
-                                    <label className="p-button--situation c-accordion__button">
-                                        <input type="checkbox" name="option" className="c-accordion__checkbox"/>
+                                    <label className="p-button--situation c-accordion__button" htmlFor="situationOption">
                                         シチュエーションを追加<br/>（オプション）
-
                                     </label>
+
+                                    <input type="checkbox" name="option" className="c-accordion__checkbox" id="situationOption"/>
                                     <div className="c-accordion__body">
                                         <label htmlFor="resultInputSituation">シチュエーション（オプション）</label><br/>
                                         <textarea className="p-textarea--source" id="resultInputSituation" placeholder="例：ビジネスのメール、友達との会話、大学のレポート など"/>
@@ -258,9 +274,8 @@ class App extends Component {
                                 </div>
 
                                 <div className="l-divide">
-                                    <button type="submit" className="p-button--share" disabled>この訳をシェアして<br/>添削してもらおう
+                                    <button type="submit" className="p-button--share" disabled={this.state.isSet === false && !this.state.copiedText }>この訳をシェアして<br/>添削してもらおう
                                     </button>
-                                    <button type="submit" className="p-button--share">この訳をシェアして<br/>添削してもらおう</button>
                                 </div>
 
                             </div>
