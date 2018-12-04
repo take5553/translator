@@ -22,8 +22,8 @@ class App extends Component {
         // 各メソッドの中で使われるthisを固定（Watsonも一応コードの中に書いておきます）
         this.translateText = this.translateText.bind(this);
         this.translateTextGoogle = this.translateTextGoogle.bind(this);
-        this.translateTextWatson = this.translateTextWatson.bind(this);
         this.translateTextBing = this.translateTextBing.bind(this);
+        this.translateTextWatson = this.translateTextWatson.bind(this);
         this.translateTextYandex = this.translateTextYandex.bind(this);
 
         this.copyTextGoogle = this.copyTextGoogle.bind(this);
@@ -35,8 +35,8 @@ class App extends Component {
         // stateを初期化
         this.state = {
             translatedTextGoogle: "",
-            translatedTextWatson: "",
             translatedTextBing: "",
+            translatedTextWatson: "",
             translatedTextYandex: "",
             copiedText: "",
             fromLang: "ja",
@@ -51,155 +51,105 @@ class App extends Component {
     translateText(){
         this.translateTextGoogle();
         this.translateTextBing();
+        this.translateTextWatson();
         this.translateTextYandex();
-
-        // Watsonは使用見送り
-        // this.translateTextWatson();
     }
 
     translateTextGoogle(){
 
-        // 変数定義
-        let Google_API_KEY = "AIzaSyBaFTETfvcumwNBxsewv-OcYqAaxyoI5Jc";　// （要改良）Keyはここに書くべきではない
+        let text = this.refs.originalText.value;
 
-        // URL生成
-        let url = `https://translation.googleapis.com/language/translate/v2?key=${Google_API_KEY}`;
-        url += '&q=' + encodeURI(this.refs.originalText.value);
-        url += `&source=${this.state.fromLang}`;
-        url += `&target=${this.state.toLang}`;
-
-        // ヘッダー生成
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('accept', 'application/json');
+        let url = '../api_connector/connectApiGoogle';
+        url += '?text=' + encodeURI(text);
 
         // API接続
         fetch(url, {
             method: 'GET',
-            headers: headers
         })
         .then(res => res.json())
         .then((response) => {
             // API接続に成功した時
             this.setState({
-                translatedTextGoogle: response.data.translations[0].translatedText
+                translatedTextGoogle: response.google
             });
         })
         .catch(error => {
             // エラーが起きた時
-            console.log("from google: ", error);
+            console.log("error is", error);
         });
-    }
-
-    // Watsonは使用見送り
-    translateTextWatson(){
-
-        // 変数定義
-        let API_Version = '2018-05-01';
-        let username = 'apikey';
-        let Watson_API_KEY = 'q8aZU1VEmZc3CX3ZYVchqB5sx7JWJoTC1zMEiWQirNfz'; // （要改良）Keyはここに書くべきではない
-
-        // URL生成
-        let url = `https://gateway-tok.watsonplatform.net/language-translator/api/v3/translate?version=${API_Version}`;
-
-        // ヘッダー生成
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Authorization', 'Basic ' + base64.encode(username + ":" + Watson_API_KEY));
-
-        // API接続
-        fetch(url, {
-            method: 'POST',
-            headers: headers,
-            mode: 'cors',
-            body: JSON.stringify({
-                "text": this.refs.originalText.value,
-                "model_id": this.state.fromLang + "-" + this.state.toLang
-            })
-        })
-        .then(response => response.json())
-        .then(response => {
-            //API接続に成功した時
-            this.setState({
-                translatedTextWatson: response.translations[0].translation
-            });
-        })
-        .catch((error) => {
-            // エラーが起きた時
-            console.log("from Watson: ", error);
-        });
-
     }
 
     translateTextBing(){
 
-        // 変数定義
-        let Bing_API_KEY = 'ebe00a413bbc4d018d0be45c82e36c5b'; // （要改良）Keyはここに書くべきではない
+        let text = this.refs.originalText.value;
 
-        // URL生成
-        let url = 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0';
-        url += `&from=${this.state.fromLang}`;
-        url += `&to=${this.state.toLang}`;
-
-        // ヘッダー生成
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Ocp-Apim-Subscription-Key', Bing_API_KEY);
+        let url = '../api_connector/connectApiBing';
+        url += '?text=' + encodeURI(text);
 
         // API接続
         fetch(url, {
-            method: 'POST',
-            headers: headers,
-            mode: 'cors',
-            body: JSON.stringify([{
-                "text": this.refs.originalText.value
-            }])
+            method: 'GET',
         })
-        .then(response => response.json())
-        .then(response => {
-            // API接続が成功した時
+        .then(res => res.json())
+        .then((response) => {
+            // API接続に成功した時
             this.setState({
-                translatedTextBing: response[0].translations[0].text
+                translatedTextBing: response.bing
             });
         })
-        .catch((error) => {
+        .catch(error => {
             // エラーが起きた時
-            console.log("from Bing: ", error);
+            console.log("error is", error);
+        });
+
+    }
+
+    translateTextWatson(){
+
+        let text = this.refs.originalText.value;
+
+        let url = '../api_connector/connectApiWatson';
+        url += '?text=' + encodeURI(text);
+
+        // API接続
+        fetch(url, {
+            method: 'GET',
+        })
+        .then(res => res.json())
+        .then((response) => {
+            // API接続に成功した時
+            this.setState({
+                translatedTextWatson: response.watson
+            });
+        })
+        .catch(error => {
+            // エラーが起きた時
+            console.log("error is", error);
         });
 
     }
 
     translateTextYandex(){
 
-        // 変数定義
-        let Yandex_API_KEY = 'trnsl.1.1.20181128T113924Z.81786ca64c5af8cb.1574994c787928cd943636a74e202ba2e5cd1f60'; // （要改良）Keyはここに書くべきではない
+        let text = this.refs.originalText.value;
 
-        // URL生成
-        let url = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
-        url += `?key=${Yandex_API_KEY}`;
-        url += `&lang=${this.state.fromLang}-${this.state.toLang}`;
-
-        // ヘッダー生成
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        let url = '../api_connector/connectApiYandex';
+        url += '?text=' + encodeURI(text);
 
         // API接続
         fetch(url, {
-            method: 'POST',
-            headers: headers,
-            mode: 'cors',
-            body: `text=${this.refs.originalText.value}`
+            method: 'GET',
         })
-        .then(response => response.json())
-        .then(response => {
-            // API接続が成功した時
+        .then(res => res.json())
+        .then((response) => {
+            // API接続に成功した時
             this.setState({
-                translatedTextYandex: response.text[0]
+                translatedTextYandex: response.yandex
             });
         })
-        .catch((error) => {
+        .catch(error => {
             // エラーが起きた時
-            console.log("from Yandex: ", error);
+            console.log("error is", error);
         });
 
     }
@@ -277,6 +227,13 @@ class App extends Component {
                                         <div className="p-result__clipboard">
                                             <textarea ref="translatedTextBing" value={this.state.translatedTextBing} className="p-textarea--result" id="resultInputBing"/>
                                             <button type="button" onClick={this.copyTextBing} className="p-clipboard__button" data-original-title="テキストをコピー">コピー</button>
+                                        </div>
+                                    </section>
+                                    <section className="p-result__item">
+                                        <label htmlFor="resultInputWatson" className="p-result__label">Watson</label>
+                                        <div className="p-result__clipboard">
+                                            <textarea value={this.state.translatedTextWatson} className="p-textarea--result" id="resultInputWatson"/>
+                                            <button className="p-clipboard__button" data-original-title="テキストをコピー">コピー</button>
                                         </div>
                                     </section>
                                     <section className="p-result__item">
