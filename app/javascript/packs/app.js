@@ -28,6 +28,7 @@ class App extends Component {
 
         this.copyTextGoogle = this.copyTextGoogle.bind(this);
         this.copyTextBing = this.copyTextBing.bind(this);
+        this.copyTextWatson = this.copyTextWatson.bind(this);
         this.copyTextYandex = this.copyTextYandex.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.valueCheck = this.valueCheck.bind(this);
@@ -165,6 +166,11 @@ class App extends Component {
         ToastStore.success("Bingからの翻訳をコピーしました", 5000, "p-alert--success");
         rsScroller.scrollToTarget('anchor-shareTextarea');
     }
+    copyTextWatson() {
+        this.setState({copiedText: this.refs.translatedTextWatson.value});
+        ToastStore.success("Watsonからの翻訳をコピーしました", 5000, "p-alert--success");
+        rsScroller.scrollToTarget('anchor-shareTextarea');
+    }
     copyTextYandex() {
         this.setState({copiedText: this.refs.translatedTextYandex.value});
         ToastStore.success("Yandexからの翻訳をコピーしました", 5000, "p-alert--success");
@@ -219,7 +225,7 @@ class App extends Component {
                                         <label htmlFor="resultInputGoogle" className="p-result__label">Google</label>
                                         <div className="p-result__clipboard">
                                             <textarea ref="translatedTextGoogle" value={this.state.translatedTextGoogle} className="p-textarea--result" id="resultInputGoogle"/>
-                                            <button type="button" onClick={this.copyTextGoogle} className="p-clipboard__button" data-original-title="テキストをコピー">コピー1</button>
+                                            <button type="button" onClick={this.copyTextGoogle} className="p-clipboard__button" data-original-title="テキストをコピー">コピー</button>
                                         </div>
                                     </section>
                                     <section className="p-result__item">
@@ -232,15 +238,15 @@ class App extends Component {
                                     <section className="p-result__item">
                                         <label htmlFor="resultInputWatson" className="p-result__label">Watson</label>
                                         <div className="p-result__clipboard">
-                                            <textarea value={this.state.translatedTextWatson} className="p-textarea--result" id="resultInputWatson"/>
-                                            <button className="p-clipboard__button" data-original-title="テキストをコピー">コピー</button>
+                                            <textarea ref="translatedTextWatson" value={this.state.translatedTextWatson} className="p-textarea--result" id="resultInputWatson"/>
+                                            <button type="button" onClick={this.copyTextWatson} className="p-clipboard__button" data-original-title="テキストをコピー">コピー</button>
                                         </div>
                                     </section>
                                     <section className="p-result__item">
                                         <label htmlFor="resultInputWatson" className="p-result__label">Yandex</label>
                                         <div className="p-result__clipboard">
                                             <textarea ref="translatedTextYandex" value={this.state.translatedTextYandex} className="p-textarea--result" id="resultInputYandex"/>
-                                            <button type="button" onClick={this.copyTextYandex} className="p-clipboard__button" data-original-title="テキストをコピー">コピー1</button>
+                                            <button type="button" onClick={this.copyTextYandex} className="p-clipboard__button" data-original-title="テキストをコピー">コピー</button>
                                         </div>
                                     </section>
                                 </div>
