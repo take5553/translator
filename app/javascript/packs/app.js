@@ -205,6 +205,7 @@ class App extends Component {
 
                     <Header/>
                     <main role="main" className="l-main">
+                        <form action="result.html" method="GET">
                         <div className="l-container">
 
                             <div className="LanguageSetting">
@@ -290,6 +291,7 @@ class App extends Component {
                             <hr/>
                             <CreateSharePage/>
                         </div>
+                        </form>
                     </main>
                     <Footer/>
                 </div>
