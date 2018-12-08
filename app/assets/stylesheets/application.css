@@ -7365,6 +7365,9 @@ category:
 .p-textarea--result {
   margin-bottom: 1rem; }
 
+.p-inputOriginal {
+  margin-bottom: 2rem; }
+
 /*
 ---
 name: header
@@ -7410,6 +7413,15 @@ category:
 .p-heading--share {
   font-weight: bold; }
 
+.p-heading--result {
+  margin: 2rem 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: bold; }
+
+.p-heading--option {
+  margin-bottom: 1rem;
+  font-size: 1.2rem; }
+
 /*
 ---
 name: translate-result
@@ -7430,6 +7442,10 @@ category:
   position: absolute;
   top: 0;
   right: 0; }
+
+img {
+  max-width: 100%;
+  height: auto; }
 
 /*
  Utility

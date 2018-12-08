@@ -221,7 +221,7 @@ class App extends Component {
 
 
                                     <div className="p-inputOriginal">
-                                        <textarea ref="originalText" className="p-textarea--source" placeholder="英語に翻訳したい文章を入力してください（●●字以内）"/>
+                                        <textarea ref="originalText" className="p-textarea--source" name="originalText" placeholder="英語に翻訳したい文章を入力してください（●●字以内）"/>
                                         <button type="button" onClick={this.translateText} className="p-button--submit">翻訳</button>
                                     </div>
 
