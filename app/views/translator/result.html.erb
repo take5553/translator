@@ -1,3 +1,44 @@
-<h1>Translator#result</h1>
-<p>Find me in app/views/translator/result.html.erb</p>
+<!--<h1>Translator#result</h1>
+<p>Find me in app/views/translator/result.html.erb</p>-->
+
+
+<header role="banner" class="l-header">
+  <div class="p-header">
+	<div class="l-container">
+	  <div class="l-header__logo"><a class="p-logo" href="#">Translators</a></div>
+	  <div class="l-header__language">
+		<ul class="p-language">
+		  <li class="p-language__item">日本語</li>
+		  <li class="p-language__item">English</li>
+		</ul>
+	  </div>
+	</div>
+  </div>
+</header>
+<main role="main" class="l-main">
+  <div class="l-container">
+
+	<section class="l-divide">
+	  <h1 class="p-heading--result">「<%= @originalText %>」の訳をシェアして添削してもらおう</h1>
+	  <h2 class="p-heading--option">オプション：大学のレポート</h2>
+	  <!--<img src="shared/images/ogpimage.png" height="auto" width="100%"/>-->
+
 <%= image_tag('ogpimage.png', :size => '1200x630') %>
+	</section>
+
+
+	<div class="l-divide text-center">
+	  <a href="https://twitter.com/intent/tweet?text=教えてバイリンガル&hashtags=翻訳,バイリンガル&url=http://localhost:3000/result.html" class="p-button--share" target="_blank">Twitterに投稿</a>
+	</div>
+	<div class="l-divide text-center">
+	  <button type="submit" class="p-button--back">戻る</button>
+	</div>
+
+
+  </div>
+</main>
+<footer class="l-footer">
+  <div class="p-footer">
+	<small>© 2018 Translators @ 関西webアプリ作ろう会</small>
+  </div>
+</footer>
