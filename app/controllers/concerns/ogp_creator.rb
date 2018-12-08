@@ -10,6 +10,7 @@ class OgpCreator
 
   def self.build(translated)
 
+    translated << ' '
     text = prepare_text(translated)
     p text
 
