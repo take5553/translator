@@ -6,7 +6,8 @@ class TranslatorController < ApplicationController
   end
 
   def result
-  	translated = (ogp_params[:translated]).gsub("'", "\\\\'")
+  	@translatedText = ogp_params[:translated]
+    translated = (ogp_params[:translated]).gsub("'", "\\\\'")
     @imageName = Zlib.crc32(translated)
     if not FileTest.exist?(Rails.root.join("app", "assets", "images", "ogp", "#{@imageName}.png"))
       image = OgpCreator.build(translated, @imageName)
@@ -14,7 +15,7 @@ class TranslatorController < ApplicationController
     end
     @originalText = ogp_params[:originalText]
     @situation = ogp_params[:situation]
-
+    render :layout => 'resultlayout'
   end
 
   def ogp_params

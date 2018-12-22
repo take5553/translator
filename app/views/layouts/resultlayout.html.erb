@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Translator</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+  <meta name="viewport" content="width=device-width">
+  <meta content="telephone=no" name="format-detection">
+  <meta name="description" content="<%= @originalText %>の訳をシェアして添削してもらおう">
+  <meta property="og:title" content="<%= @originalText %>の訳をシェアして添削してもらおう">
+  <meta property="og:description" content="<%= @originalText %>の訳をシェアして添削してもらおう">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:image" content="assets/ogp/<%= @imageName %>.png">
+  <meta property="og:url" content="http://localhost:3000/translator/result.html?originalText=<%= @originalText %>&translated=<%= @translatedText %>&situation=<%= @situation %>">
+  <meta property="og:site_name" content="translator">
+  <meta name="twitter:card" content="summary_large_image">
+
+
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
