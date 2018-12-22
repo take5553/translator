@@ -1,9 +1,10 @@
 class TranslatorController < ApplicationController
+
   def index
   end
 
   def result
-  	translated = ogp_params[:translated]
+  	translated = (ogp_params[:translated]).gsub("'", "\\\\'")
     image = OgpCreator.build(translated)
     @originalText = ogp_params[:originalText]
     @situation = ogp_params[:situation]
