@@ -8,7 +8,7 @@ class OgpCreator
   FONT = './app/assets/fonts/Kingthings Clarity1.1.ttf'
   FONT_SIZE = 33
 
-  def self.build(translated)
+  def self.build(translated, imageName)
 
     translated << ' '
     text = prepare_text(translated)
@@ -22,7 +22,7 @@ class OgpCreator
       config.pointsize FONT_SIZE
       config.draw "text #{TEXT_POSITION} '#{text}'"
     end
-    image.write './app/assets/images/ogpimage.png'
+    image.write "./app/assets/images/ogp/#{imageName}.png"
   end
 
   private
