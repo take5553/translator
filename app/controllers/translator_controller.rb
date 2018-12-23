@@ -1,6 +1,7 @@
 class TranslatorController < ApplicationController
 
   require "zlib"
+  require "cgi"
 
   def index
   end
@@ -15,6 +16,12 @@ class TranslatorController < ApplicationController
     end
     @originalText = ogp_params[:originalText]
     @situation = ogp_params[:situation]
+    
+    @resultUrl = @originalText
+    @resultUrl << "/"
+    @resultUrl << @translatedText
+    @resultUrl << "/"
+
     render :layout => 'resultlayout'
   end
 
