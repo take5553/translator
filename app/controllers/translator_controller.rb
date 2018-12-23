@@ -17,10 +17,10 @@ class TranslatorController < ApplicationController
     @originalText = ogp_params[:originalText]
     @situation = ogp_params[:situation]
     
-    @resultUrl = @originalText
-    @resultUrl << "/"
-    @resultUrl << @translatedText
-    @resultUrl << "/"
+    # @resultUrl << @originalText
+    # @resultUrl << "/"
+    # @resultUrl << @translatedText
+    # @resultUrl << "/"
 
     render :layout => 'resultlayout'
   end
