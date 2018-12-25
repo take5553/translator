@@ -22,7 +22,7 @@ class OgpCreator
       config.pointsize FONT_SIZE
       config.draw "text #{TEXT_POSITION} '#{text}'"
     end
-    image.write "./app/assets/images/ogp/#{imageName}.png"
+    image.write "./public/ogp/#{imageName}.png"
   end
 
   private
