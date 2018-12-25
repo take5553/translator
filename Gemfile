@@ -73,3 +73,5 @@ gem 'jquery-rails'
 # gem 'sass-rails', :git => 'https://github.com/rails/sass-rails.git'
 #end
 
+gem 'unicorn'
+
