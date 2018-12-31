@@ -19,7 +19,7 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        // 各メソッドの中で使われるthisを固定（Watsonも一応コードの中に書いておきます）
+        // 各メソッドの中で使われるthisを固定
         this.translateText = this.translateText.bind(this);
         this.translateTextGoogle = this.translateTextGoogle.bind(this);
         this.translateTextBing = this.translateTextBing.bind(this);
@@ -221,7 +221,7 @@ class App extends Component {
 
 
                                     <div className="p-inputOriginal">
-                                        <textarea ref="originalText" className="p-textarea--source" name="originalText" placeholder="英語に翻訳したい文章を入力してください（●●字以内）"/>
+                                        <textarea ref="originalText" className="p-textarea--source" name="originalText" placeholder="英語に翻訳したい文章を入力してください"/>
                                         <button type="button" onClick={this.translateText} className="p-button--submit">翻訳</button>
                                     </div>
 

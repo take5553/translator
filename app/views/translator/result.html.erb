@@ -5,7 +5,7 @@
 <header role="banner" class="l-header">
   <div class="p-header">
 	<div class="l-container">
-	  <div class="l-header__logo"><a class="p-logo" href="index">Translators</a></div>
+	  <div class="l-header__logo"><a class="p-logo" href="http://www.tell-me-bilingual.com<%= ":3000" if Rails.env.development? %>/">Translators</a></div>
 	  <div class="l-header__language">
 		<ul class="p-language">
 		  <li class="p-language__item">日本語</li>
@@ -28,7 +28,7 @@
 
 
 	<div class="l-divide text-center">
-	  <a x-href="https://twitter.com/intent/tweet?text=教えてバイリンガル&hashtags=翻訳,バイリンガル&url=http://153.120.128.21:3000/result/<%= @resultUrl%>" class="p-button--share" target="_blank"><s>Twitterに投稿</s></a>
+	  <a href="https://twitter.com/intent/tweet?text=教えてバイリンガル&hashtags=翻訳,バイリンガル&url=http://www.tell-me-bilingual.com<%= ":3000" if Rails.env.development? %>/result.html?<%= @resultUrl%>" class="p-button--share" target="_blank">Twitterに投稿</a>
 	</div>
 	<div class="l-divide text-center">
 	  <button type="submit" class="p-button--back">戻る</button>
