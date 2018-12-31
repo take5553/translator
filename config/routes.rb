@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'translator/index'
-  get 'translator/result(/:originalText/:translated(/:situation))' => 'translator#result'
+  root 'translator#index'
+  get 'result(/:originalText/:translated(/:situation))' => 'translator#result'
   get 'api_connector/connectApiGoogle'
   get 'api_connector/connectApiBing'
   get 'api_connector/connectApiWatson'
