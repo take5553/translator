@@ -49,7 +49,7 @@ class ApiConnectorController < ApplicationController
 
   def translate_text_google(origin_text, source, target)
 
-    google_api_key = 'AIzaSyBaFTETfvcumwNBxsewv-OcYqAaxyoI5Jc'
+    google_api_key = Rails.application.credentials.api_key[:google]
 
     endpoint_url = "https://translation.googleapis.com/language/translate/v2"
     querys = {'key' => google_api_key, 'q' => origin_text, 'source' => source, 'target' => target}
@@ -81,7 +81,7 @@ class ApiConnectorController < ApplicationController
 
   def translate_text_bing(origin_text, source, target)
 
-    bing_api_key = 'ebe00a413bbc4d018d0be45c82e36c5b'
+    bing_api_key = Rails.application.credentials.api_key[:bing]
 
     endpoint_url = "https://api.cognitive.microsofttranslator.com/translate"
     querys = {'api-version' => '3.0', 'from' => source, 'to' => target}
@@ -113,7 +113,7 @@ class ApiConnectorController < ApplicationController
   def translate_text_watson(origin_text, source, target)
 
   	username = 'apikey'
-    watson_api_key = 'QGtFD0qy-lWHuy5ibnld5yVvcBsOlvkEiYRQD8uvxUJh'
+    watson_api_key = Rails.application.credentials.api_key[:watson]
     auth = Base64.strict_encode64(username + ':' + watson_api_key)
 
     endpoint_url = "https://gateway-tok.watsonplatform.net/language-translator/api/v3/translate"
@@ -146,7 +146,7 @@ class ApiConnectorController < ApplicationController
 
   def translate_text_yandex(origin_text, source, target)
 
-    yandex_api_key = 'trnsl.1.1.20181128T113924Z.81786ca64c5af8cb.1574994c787928cd943636a74e202ba2e5cd1f60'
+    yandex_api_key = Rails.application.credentials.api_key[:yandex]
 
     endpoint_url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
     querys = {'key' => yandex_api_key, 'lang' => source + '-' + target}
